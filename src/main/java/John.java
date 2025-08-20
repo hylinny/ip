@@ -1,11 +1,25 @@
+import java.util.Scanner;
+
 public class John {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         John.printLine();
-        System.out.println("Hello! I'm John :)");
-        System.out.println("What can I do for you?");
+        System.out.println("Hello! I'm John :)\nWhat can I do for you?");
+        John.printLine();
+        System.out.println();
+
+        String input = sc.nextLine();
+        while (!input.equals("bye")) {
+            John.printLine();
+            System.out.println(input);
+            John.printLine();
+            System.out.println();
+            input = sc.nextLine();
+        }
         John.printLine();
         System.out.println("Bye. Hope to see you again soon!");
         John.printLine();
+        sc.close();
     }
 
     public static void printLine() {
