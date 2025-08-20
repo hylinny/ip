@@ -7,7 +7,10 @@ public class TaskList {
         size = 0;
     }
 
-    public void addTask(Task task) {
+    public void addTask(Task task) throws JohnException {
+        if (size >= tasks.length) {
+            throw new JohnException("Task list is full. Cannot add more tasks.");
+        }
         tasks[size++] = task;
     }
 
@@ -17,10 +20,9 @@ public class TaskList {
         }
     }
 
-    public Task getTask(int index) {
+    public Task getTask(int index) throws JohnException {
         if (index < 0 || index >= size) {
-            System.out.println("Invalid task index.");
-            return null;
+            throw new JohnException("Task index out of bounds.");
         }
         return tasks[index];
     }
