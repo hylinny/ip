@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class John {
+    public List<String> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         John.printLine();
@@ -8,10 +12,18 @@ public class John {
         John.printLine();
         System.out.println();
 
+        John john = new John();
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             John.printLine();
-            System.out.println(input);
+            if (input.equals("list")) {
+                for (int i = 0; i < john.tasks.size(); i++) {
+                    System.out.println((i + 1) + ". " + john.tasks.get(i));
+                }
+            } else {
+                System.out.println("added: " + input);
+                john.tasks.add(input);
+            }
             John.printLine();
             System.out.println();
             input = sc.nextLine();
