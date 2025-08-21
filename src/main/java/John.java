@@ -14,39 +14,43 @@ public class John {
         System.out.println();
 
         TaskList tasklist = new TaskList(100);
-        String input = sc.nextLine();
+        String input = sc.nextLine().trim();
         while (!input.equals("bye")) {
             John.printLine();
             try {
-                String[] parts = input.split(" ", 2);
-                String command = parts[0];
-                String description = "-1";
-                if (!input.equals("list")) {
-                    description = parts[1];
-                }
+                String[] userInput = input.split(" ", 2);
+                String command = userInput[0];
+                String description = (userInput.length > 1) ? userInput[1].trim() : "";
                 Command cmd = Command.valueOf(command.toUpperCase());
                 Task task;
-                String desc;
-                String startDate;
-                String endDate;
+
                 switch (cmd) {
                 case LIST:
                     System.out.println("Here are the tasks in your list:");
                     tasklist.printTasks();
                     break;
                 case MARK:
+                    if (!description.matches("\\d+")) {
+                        throw new JohnException("Please input a valid task number.");
+                    }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
-                    task.isDone = true;
+                    task.markDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(task);
                     break;
                 case UNMARK:
+                    if (!description.matches("\\d+")) {
+                        throw new JohnException("Please input a valid task number.");
+                    }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
-                    task.isDone = false;
+                    task.markUndone();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(task);
                     break;
                 case DELETE:
+                    if (!description.matches("\\d+")) {
+                        throw new JohnException("Please input a valid task number.");
+                    }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
                     tasklist.deleteTask(Integer.parseInt(description) - 1);
                     System.out.println("Noted. I've removed this task:");
@@ -54,6 +58,9 @@ public class John {
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
                     break;
                 case TODO:
+                    if (description.isBlank()) {
+                        throw new JohnException("Todo command must include a description.");
+                    }
                     Todo todo = new Todo(description);
                     tasklist.addTask(todo);
                     System.out.println("Got it. I've added this task:");
@@ -61,44 +68,63 @@ public class John {
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
                     break;
                 case DEADLINE:
-                    desc = description.split(" /by ", 2)[0];
-                    endDate = description.split(" /by ", 2)[1];
-                    Deadline deadline = new Deadline(desc, endDate);
+                    Deadline deadline = getDeadline(description);
                     tasklist.addTask(deadline);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(deadline);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
                     break;
                 case EVENT:
-                    desc = description.split(" /from ", 2)[0];
-                    startDate = description.split(" /from ", 2)[1].split(" /to ", 2)[0];
-                    endDate = description.split(" /to ", 2)[1];
-                    Event event = new Event(desc, startDate, endDate);
+                    Event event = getEvent(description);
                     tasklist.addTask(event);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(event);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
                     break;
-                default:
-                    throw new JohnException("Unexpected error occurred.");
                 }
             } catch (JohnException e) {
                 System.out.println("Error: " + e.getMessage());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Error: Command used incorrectly. Please check the command format.");
-            } catch (NumberFormatException e) {
-                System.out.println("Error: Please input a valid task number.");
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) { // Catching invalid command that doesn't exist in Command.
                 System.out.println("Error: Please input a valid command.");
             }
             John.printLine();
             System.out.println();
-            input = sc.nextLine();
+            input = sc.nextLine().trim();
         }
         John.printLine();
         System.out.println("Bye. Hope to see you again soon!");
         John.printLine();
         sc.close();
+    }
+
+    private static Deadline getDeadline(String description) throws JohnException {
+        String[] deadlineDescription = description.split("\\s*/by\\s*", 2);
+        if (deadlineDescription.length < 2
+                || deadlineDescription[0].isBlank()
+                || deadlineDescription[1].isBlank()
+                || deadlineDescription[1].contains("/by")) { // this line's check ensures only one /by is used
+            throw new JohnException("Deadline command must include a description and a deadline.");
+        }
+        return new Deadline(deadlineDescription[0], deadlineDescription[1]);
+    }
+
+    private static Event getEvent(String description) throws JohnException {
+        int fromIndex = description.indexOf("/from");
+        int toIndex = description.indexOf("/to");
+        if (fromIndex == -1 || toIndex == -1 || fromIndex >= toIndex) {
+            throw new JohnException("Event command must include /from and /to keywords, in the correct order.");
+        }
+
+        String[] eventDescription = description.split("\\s*/from\\s*|\\s*/to\\s*", 3);
+        if (eventDescription.length < 3
+                || eventDescription[0].isBlank()
+                || eventDescription[1].isBlank()
+                || eventDescription[2].isBlank()
+                || eventDescription[2].contains("/from")
+                || eventDescription[2].contains("/to")) {
+            throw new JohnException("Event command must include a description, start date, and end date.");
+        }
+        return new Event(eventDescription[0], eventDescription[1], eventDescription[2]);
     }
 
     public static void printLine() {
