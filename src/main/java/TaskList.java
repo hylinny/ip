@@ -14,6 +14,16 @@ public class TaskList {
         tasks[size++] = task;
     }
 
+    public void deleteTask(int index) throws JohnException {
+        if (index < 0 || index >= size) {
+            throw new JohnException("Task index out of bounds.");
+        }
+        for (int i = index; i < size - 1; i++) {
+            tasks[i] = tasks[i + 1];
+        }
+        tasks[--size] = null; // Clear the last task
+    }
+
     public void printTasks() {
         for (int i = 0; i < size; i++) {
             System.out.println((i + 1) + ". " + tasks[i]);

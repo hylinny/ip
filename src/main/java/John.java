@@ -29,6 +29,13 @@ public class John {
                     task.isDone = false;
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(task);
+                } else if (input.startsWith("delete")) {
+                    int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                    Task task = tasklist.getTask(taskIndex);
+                    tasklist.deleteTask(taskIndex);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(task);
+                    System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
                 } else {
                     String[] parts = input.split(" ", 2);
                     String command = parts[0];
