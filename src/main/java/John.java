@@ -13,7 +13,8 @@ public class John {
         John.printLine();
         System.out.println();
 
-        TaskList tasklist = new TaskList(100);
+
+        TaskList tasklist = new TaskList();
         String input = sc.nextLine().trim();
         while (!input.equals("bye")) {
             John.printLine();
@@ -35,6 +36,7 @@ public class John {
                     }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
                     task.markDone();
+                    tasklist.save();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(task);
                     break;
@@ -44,6 +46,7 @@ public class John {
                     }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
                     task.markUndone();
+                    tasklist.save();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(task);
                     break;
@@ -53,6 +56,7 @@ public class John {
                     }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
                     tasklist.deleteTask(Integer.parseInt(description) - 1);
+                    tasklist.save();
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(task);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
@@ -63,6 +67,7 @@ public class John {
                     }
                     Todo todo = new Todo(description);
                     tasklist.addTask(todo);
+                    tasklist.save();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(todo);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
@@ -70,6 +75,7 @@ public class John {
                 case DEADLINE:
                     Deadline deadline = getDeadline(description);
                     tasklist.addTask(deadline);
+                    tasklist.save();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(deadline);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
@@ -77,6 +83,7 @@ public class John {
                 case EVENT:
                     Event event = getEvent(description);
                     tasklist.addTask(event);
+                    tasklist.save();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(event);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
@@ -84,7 +91,7 @@ public class John {
                 }
             } catch (JohnException e) {
                 System.out.println("Error: " + e.getMessage());
-            } catch (IllegalArgumentException e) { // Catching invalid command that doesn't exist in Command.
+            } catch (IllegalArgumentException e) {
                 System.out.println("Error: Please input a valid command.");
             }
             John.printLine();
