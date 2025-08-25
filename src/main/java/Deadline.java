@@ -6,6 +6,10 @@ public class Deadline extends Task {
         this.endDate = endDate;
     }
 
+    public String toFileString() {
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + endDate;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + endDate + ")";
