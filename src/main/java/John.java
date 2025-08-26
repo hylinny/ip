@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import Exceptions.JohnException;
+import Parser.Parser;
 import Storage.Storage;
 import Tasks.*;
 import Ui.JohnUi;
@@ -37,9 +38,9 @@ public class John {
         while (!input.equals("bye")) {
             ui.printLine();
             try {
-                String[] userInput = input.split(" ", 2);
-                String command = userInput[0];
-                String description = (userInput.length > 1) ? userInput[1].trim() : "";
+                String[] pair = Parser.parse(input);
+                String command = pair[0];
+                String description = pair[1];
                 Command cmd = Command.valueOf(command.toUpperCase());
                 Task task;
 
@@ -91,7 +92,7 @@ public class John {
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
                     break;
                 case DEADLINE:
-                    Deadline deadline = getDeadline(description);
+                    Deadline deadline = Parser.getDeadline(description);
                     tasklist.addTask(deadline);
                     storage.save(tasklist);
                     System.out.println("Got it. I've added this task:");
@@ -99,7 +100,7 @@ public class John {
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
                     break;
                 case EVENT:
-                    Event event = getEvent(description);
+                    Event event = Parser.getEvent(description);
                     tasklist.addTask(event);
                     storage.save(tasklist);
                     System.out.println("Got it. I've added this task:");
@@ -124,35 +125,5 @@ public class John {
 
     public static void main(String[] args) {
         new John("./data/john.txt").run();
-    }
-
-    private static Deadline getDeadline(String description) throws JohnException {
-        String[] deadlineDescription = description.split("\\s*/by\\s*", 2);
-        if (deadlineDescription.length < 2
-                || deadlineDescription[0].isBlank()
-                || deadlineDescription[1].isBlank()
-                || deadlineDescription[1].contains("/by")) { // this line's check ensures only one /by is used
-            throw new JohnException("Deadline command must include a description and a deadline.");
-        }
-        return new Deadline(deadlineDescription[0], deadlineDescription[1]);
-    }
-
-    private static Event getEvent(String description) throws JohnException {
-        int fromIndex = description.indexOf("/from");
-        int toIndex = description.indexOf("/to");
-        if (fromIndex == -1 || toIndex == -1 || fromIndex >= toIndex) {
-            throw new JohnException("Event command must include /from and /to keywords, in the correct order.");
-        }
-
-        String[] eventDescription = description.split("\\s*/from\\s*|\\s*/to\\s*", 3);
-        if (eventDescription.length < 3
-                || eventDescription[0].isBlank()
-                || eventDescription[1].isBlank()
-                || eventDescription[2].isBlank()
-                || eventDescription[2].contains("/from")
-                || eventDescription[2].contains("/to")) {
-            throw new JohnException("Event command must include a description, start date, and end date.");
-        }
-        return new Event(eventDescription[0], eventDescription[1], eventDescription[2]);
     }
 }
