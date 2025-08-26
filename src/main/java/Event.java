@@ -1,11 +1,14 @@
-public class Event extends Task {
-    protected String startDate;
-    protected String endDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String startDate, String endDate) {
+public class Event extends Task {
+    protected LocalDateTime startDate;
+    protected LocalDateTime endDate;
+
+    public Event(String description, String startDate, String endDate) throws JohnException {
         super(description);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = this.parseDateTime(startDate);
+        this.endDate = this.parseDateTime(endDate);
     }
 
     public String toFileString() {
@@ -14,6 +17,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startDate + " to: " + endDate + ")";
+        return "[E]"
+                + super.toString()
+                + " (from: "
+                + startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
+                + " to: "
+                + endDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
+                + ")";
     }
 }
