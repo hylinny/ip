@@ -6,60 +6,54 @@ __________________________________________________
 __________________________________________________
 Got it. I've added this task:
 [T][ ] borrow book
+You now have 2 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [T][ ] borrow book
+__________________________________________________
+
+__________________________________________________
+Error: Invalid date/time format provided.
+__________________________________________________
+
+__________________________________________________
+Error: Invalid date/time format provided.
+__________________________________________________
+
+__________________________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [T][ ] borrow book
+__________________________________________________
+
+__________________________________________________
+Nice! I've marked this task as done:
+[T][X] borrow book
+__________________________________________________
+
+__________________________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [T][X] borrow book
+__________________________________________________
+
+__________________________________________________
+OK, I've marked this task as not done yet:
+[T][ ] borrow book
+__________________________________________________
+
+__________________________________________________
+Noted. I've removed this task:
+[T][ ] borrow book
 You now have 1 tasks in the list.
 __________________________________________________
 
 __________________________________________________
 Here are the tasks in your list:
 1. [T][ ] borrow book
-__________________________________________________
-
-__________________________________________________
-Got it. I've added this task:
-[D][ ] return book (by: Sunday)
-You now have 2 tasks in the list.
-__________________________________________________
-
-__________________________________________________
-Got it. I've added this task:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
-You now have 3 tasks in the list.
-__________________________________________________
-
-__________________________________________________
-Here are the tasks in your list:
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-__________________________________________________
-
-__________________________________________________
-Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
-__________________________________________________
-
-__________________________________________________
-Here are the tasks in your list:
-1. [T][ ] borrow book
-2. [D][X] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-__________________________________________________
-
-__________________________________________________
-OK, I've marked this task as not done yet:
-[D][ ] return book (by: Sunday)
-__________________________________________________
-
-__________________________________________________
-Noted. I've removed this task:
-[D][ ] return book (by: Sunday)
-You now have 2 tasks in the list.
-__________________________________________________
-
-__________________________________________________
-Here are the tasks in your list:
-1. [T][ ] borrow book
-2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 __________________________________________________
 
 __________________________________________________
