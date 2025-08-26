@@ -1,4 +1,4 @@
-package Storage;
+package John.Storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Exceptions.JohnException;
-import Tasks.*;
+import John.Exceptions.JohnException;
+import John.Tasks.*;
 
 public class Storage {
     private String filePath;

@@ -1,10 +1,12 @@
+package John;
+
 import java.util.Scanner;
 
-import Exceptions.JohnException;
-import Parser.Parser;
-import Storage.Storage;
-import Tasks.*;
-import Ui.JohnUi;
+import John.Exceptions.JohnException;
+import John.Parser.Parser;
+import John.Storage.Storage;
+import John.Tasks.*;
+import John.Ui.JohnUi;
 
 public class John {
 
@@ -30,7 +32,7 @@ public class John {
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.printLine();
-        System.out.println("Hello! I'm John :)\nWhat can I do for you?");
+        System.out.println("Hello! I'm John. :)\nWhat can I do for you?");
         ui.printLine();
         System.out.println();
 

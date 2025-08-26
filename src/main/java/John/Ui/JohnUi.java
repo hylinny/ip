@@ -1,4 +1,4 @@
-package Ui;
+package John.Ui;
 
 public class JohnUi {
     public static final String LINE = "__________________________________________________";

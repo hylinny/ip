@@ -1,9 +1,9 @@
-package Tasks;
+package John.Tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import Exceptions.JohnException;
+import John.Exceptions.JohnException;
 
 public class Deadline extends Task {
     protected LocalDateTime endDate;

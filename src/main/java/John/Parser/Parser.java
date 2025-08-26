@@ -1,8 +1,8 @@
-package Parser;
+package John.Parser;
 
-import Exceptions.JohnException;
-import Tasks.Deadline;
-import Tasks.Event;
+import John.Exceptions.JohnException;
+import John.Tasks.Deadline;
+import John.Tasks.Event;
 
 public class Parser {
     // Helper class to parse user input, static methods only
