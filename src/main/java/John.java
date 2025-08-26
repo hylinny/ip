@@ -1,23 +1,29 @@
 import java.util.Scanner;
 
 import Exceptions.JohnException;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.TaskList;
-import Tasks.Todo;
+import Storage.Storage;
+import Tasks.*;
 import Ui.JohnUi;
 
 public class John {
 
+    private Storage storage;
+    private TaskList tasklist;
     private JohnUi ui;
 
     enum Command {
         LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
     }
 
-    public John() {
+    public John(String filePath) {
         ui = new JohnUi();
+        storage = new Storage(filePath);
+        try {
+            tasklist = new TaskList(storage.load());
+        } catch (JohnException e) {
+            ui.showLoadingError();
+            tasklist = new TaskList();
+        }
     }
 
     public void run() {
@@ -27,7 +33,6 @@ public class John {
         ui.printLine();
         System.out.println();
 
-        TaskList tasklist = new TaskList();
         String input = sc.nextLine().trim();
         while (!input.equals("bye")) {
             ui.printLine();
@@ -49,7 +54,7 @@ public class John {
                     }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
                     task.markDone();
-                    tasklist.save();
+                    storage.save(tasklist);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(task);
                     break;
@@ -59,7 +64,7 @@ public class John {
                     }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
                     task.markUndone();
-                    tasklist.save();
+                    storage.save(tasklist);
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(task);
                     break;
@@ -69,7 +74,7 @@ public class John {
                     }
                     task = tasklist.getTask(Integer.parseInt(description) - 1);
                     tasklist.deleteTask(Integer.parseInt(description) - 1);
-                    tasklist.save();
+                    storage.save(tasklist);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(task);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
@@ -80,7 +85,7 @@ public class John {
                     }
                     Todo todo = new Todo(description);
                     tasklist.addTask(todo);
-                    tasklist.save();
+                    storage.save(tasklist);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(todo);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
@@ -88,7 +93,7 @@ public class John {
                 case DEADLINE:
                     Deadline deadline = getDeadline(description);
                     tasklist.addTask(deadline);
-                    tasklist.save();
+                    storage.save(tasklist);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(deadline);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
@@ -96,7 +101,7 @@ public class John {
                 case EVENT:
                     Event event = getEvent(description);
                     tasklist.addTask(event);
-                    tasklist.save();
+                    storage.save(tasklist);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(event);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
@@ -118,7 +123,7 @@ public class John {
     }
 
     public static void main(String[] args) {
-        new John().run();
+        new John("./data/john.txt").run();
     }
 
     private static Deadline getDeadline(String description) throws JohnException {
