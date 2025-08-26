@@ -1,3 +1,5 @@
+package Tasks;
+
 import static java.lang.System.exit;
 
 import java.io.File;
@@ -6,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Exceptions.JohnException;
 
 public class TaskList {
     private List<Task> tasks;

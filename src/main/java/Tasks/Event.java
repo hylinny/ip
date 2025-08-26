@@ -1,5 +1,9 @@
+package Tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import Exceptions.JohnException;
 
 public class Event extends Task {
     protected LocalDateTime startDate;

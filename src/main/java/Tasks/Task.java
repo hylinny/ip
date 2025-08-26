@@ -1,7 +1,11 @@
+package Tasks;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import Exceptions.JohnException;
 
 public abstract class Task {
     protected String description;

@@ -1,4 +1,11 @@
 import java.util.Scanner;
+
+import Exceptions.JohnException;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.TaskList;
+import Tasks.Todo;
 import Ui.JohnUi;
 
 public class John {
