@@ -1,23 +1,29 @@
 import java.util.Scanner;
+import Ui.JohnUi;
 
 public class John {
+
+    private JohnUi ui;
 
     enum Command {
         LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        John.printLine();
-        System.out.println("Hello! I'm John :)\nWhat can I do for you?");
-        John.printLine();
-        System.out.println();
+    public John() {
+        ui = new JohnUi();
+    }
 
+    public void run() {
+        Scanner sc = new Scanner(System.in);
+        ui.printLine();
+        System.out.println("Hello! I'm John :)\nWhat can I do for you?");
+        ui.printLine();
+        System.out.println();
 
         TaskList tasklist = new TaskList();
         String input = sc.nextLine().trim();
         while (!input.equals("bye")) {
-            John.printLine();
+            ui.printLine();
             try {
                 String[] userInput = input.split(" ", 2);
                 String command = userInput[0];
@@ -94,14 +100,18 @@ public class John {
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: Please input a valid command.");
             }
-            John.printLine();
+            ui.printLine();
             System.out.println();
             input = sc.nextLine().trim();
         }
-        John.printLine();
+        ui.printLine();
         System.out.println("Bye. Hope to see you again soon!");
-        John.printLine();
+        ui.printLine();
         sc.close();
+    }
+
+    public static void main(String[] args) {
+        new John().run();
     }
 
     private static Deadline getDeadline(String description) throws JohnException {
