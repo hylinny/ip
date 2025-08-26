@@ -143,13 +143,4 @@ public class John {
         }
         return new Event(eventDescription[0], eventDescription[1], eventDescription[2]);
     }
-
-    public static void printLine() {
-        char lineChar = '_';
-        int lineLength = 50;
-        for (int i = 0; i < lineLength; i++) {
-            System.out.print(lineChar);
-        }
-        System.out.println();
-    }
 }
