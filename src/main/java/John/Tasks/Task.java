@@ -29,6 +29,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Returns the status icon in bracket form, e.g., "[X]" for done or "[ ]" for not done.
      *
