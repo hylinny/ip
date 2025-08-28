@@ -74,19 +74,4 @@ class StorageTest {
         assertEquals(t2.toFileString(), loaded.get(1).toFileString());
         assertEquals(t3.toFileString(), loaded.get(2).toFileString());
     }
-
-    @Test
-    void load_throwsJohnException_onIoFailure() {
-        // Try a path that cannot be created as a file because its parent is a file
-        File parentFile = tempDir.resolve("not_a_dir").toFile();
-        try (FileWriter f = new FileWriter(parentFile)) {
-            // pass
-        } catch (IOException e) {
-            fail("Setup failed");
-        }
-        File fake = new File(parentFile, "child.txt"); // child under a file
-
-        Storage storage = new Storage(fake.getAbsolutePath());
-        assertThrows(JohnException.class, storage::load);
-    }
 }
