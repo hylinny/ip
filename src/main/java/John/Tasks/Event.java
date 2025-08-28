@@ -29,4 +29,19 @@ public class Event extends Task {
                 + endDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
                 + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event other)) return false;
+        return description.equals(other.description)
+                && startDate.equals(other.startDate)
+                && endDate.equals(other.endDate)
+                && isDone == other.isDone;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(description, startDate, endDate, isDone);
+    }
 }
