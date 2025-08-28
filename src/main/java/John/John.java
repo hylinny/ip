@@ -15,7 +15,7 @@ public class John {
     private JohnUi ui;
 
     enum Command {
-        LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+        LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
     }
 
     public John(String filePath) {
@@ -50,6 +50,23 @@ public class John {
                 case LIST:
                     System.out.println("Here are the tasks in your list:");
                     tasklist.printTasks();
+                    break;
+                case FIND:
+                    if (description.isBlank()) {
+                        throw new JohnException("Find command must include a keyword.");
+                    }
+                    System.out.println("Here are the matching tasks in your list:");
+                    int count = 0;
+                    for (int i = 0; i < tasklist.getSize(); i++) {
+                        Task t = tasklist.getTask(i);
+                        if (t.getDescription().contains(description)) {
+                            System.out.println((count + 1) + ". " + t);
+                            count++;
+                        }
+                    }
+                    if (count == 0) {
+                        System.out.println("No matching tasks found.");
+                    }
                     break;
                 case MARK:
                     if (!description.matches("\\d+")) {
