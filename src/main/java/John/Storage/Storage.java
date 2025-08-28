@@ -10,13 +10,36 @@ import java.util.Scanner;
 import John.Exceptions.JohnException;
 import John.Tasks.*;
 
+/**
+ * Handles persistence of tasks to and from a flat file on disk.
+ * <p>
+ * The storage format is one line per task using pipe-separated fields, e.g.:
+ * <pre>
+ * T | 0 | description
+ * D | 1 | description | 2019-12-02T18:00
+ * E | 0 | description | 2019-12-02T18:00 | 2019-12-02T20:00
+ * </pre>
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a new Storage instance bound to the specified file path.
+     * Parent directories are created on first save/load if missing.
+     *
+     * @param filePath absolute or relative path to the data file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the backing file. If the file does not exist, it is created
+     * and an empty list is returned. Corrupted lines are skipped with a message.
+     *
+     * @return the list of tasks loaded from disk (possibly empty)
+     * @throws JohnException if an IO error occurs while accessing the file
+     */
     public ArrayList<Task> load() throws JohnException {
         File f = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -45,6 +68,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Parses a single line from the storage file into a {@link Task}.
+     *
+     * @param line the raw line content
+     * @return a reconstructed Task instance
+     * @throws JohnException if the line is malformed or references an unknown type
+     */
     private static Task parseTask(String line) throws JohnException {
         String[] parts = line.split("\\s*\\|\\s*");
         String type = parts[0];
@@ -73,6 +103,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Saves all tasks to the backing file, overwriting existing content.
+     *
+     * @param tasklist the tasks to persist
+     */
     public void save(TaskList tasklist) {
         try {
             List<Task> tasks = tasklist.getTasks();

@@ -8,6 +8,9 @@ import John.Storage.Storage;
 import John.Tasks.*;
 import John.Ui.JohnUi;
 
+/**
+ * Entry point and command loop for the John task manager application.
+ */
 public class John {
 
     private Storage storage;
@@ -18,6 +21,13 @@ public class John {
         LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
     }
 
+    /**
+     * Constructs a John application instance bound to a storage file path.
+     * It attempts to load tasks from storage, falling back to an empty list
+     * and showing a UI message if loading fails.
+     *
+     * @param filePath path to the persistence file used by {@link Storage}
+     */
     public John(String filePath) {
         ui = new JohnUi();
         storage = new Storage(filePath);
@@ -29,6 +39,11 @@ public class John {
         }
     }
 
+    /**
+     * Starts the interactive command loop, processing user input until "bye".
+     * Commands are parsed by {@link Parser} and may modify the {@link TaskList}
+     * and underlying {@link Storage}.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.printLine();

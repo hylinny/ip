@@ -6,14 +6,30 @@ import java.util.Objects;
 
 import John.Exceptions.JohnException;
 
+/**
+ * A task with a single deadline date/time.
+ */
 public class Deadline extends Task {
     protected LocalDateTime endDate;
 
+    /**
+     * Constructs a Deadline with the given description and deadline string.
+     * The date/time string is parsed using {@link Task#parseDateTime(String)}.
+     *
+     * @param description description of the task
+     * @param endDate     deadline (date/time) in a supported format
+     * @throws JohnException if the date/time cannot be parsed
+     */
     public Deadline(String description, String endDate) throws JohnException {
         super(description);
         this.endDate = this.parseDateTime(endDate);
     }
 
+    /**
+     * Returns the serialized representation of this deadline for storage.
+     *
+     * @return a one-line string suitable for persistence
+     */
     public String toFileString() {
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + endDate;
     }
