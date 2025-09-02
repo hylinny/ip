@@ -1,8 +1,8 @@
-package John.Parser;
+package john.parser;
 
-import John.Exceptions.JohnException;
-import John.Tasks.Deadline;
-import John.Tasks.Event;
+import john.exceptions.JohnException;
+import john.tasks.Deadline;
+import john.tasks.Event;
 
 /**
  * Parses user input into commands and domain objects.
@@ -30,7 +30,7 @@ public class Parser {
     /**
      * Parses a deadline description in the form:
      * <pre>
-     *   <description> /by <dateTime>
+     *   description /by dateTime
      * </pre>
      *
      * @param description user-provided description including "/by"
@@ -51,7 +51,7 @@ public class Parser {
     /**
      * Parses an event description in the form:
      * <pre>
-     *   <description> /from <startDateTime> /to <endDateTime>
+     *   description /from startDateTime /to endDateTime
      * </pre>
      *
      * @param description user-provided description including "/from" and "/to"

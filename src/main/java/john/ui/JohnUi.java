@@ -1,4 +1,4 @@
-package John.Ui;
+package john.ui;
 
 /**
  * UI utilities for the chatbot John.

@@ -1,12 +1,16 @@
-package John;
+package john;
 
 import java.util.Scanner;
 
-import John.Exceptions.JohnException;
-import John.Parser.Parser;
-import John.Storage.Storage;
-import John.Tasks.*;
-import John.Ui.JohnUi;
+import john.exceptions.JohnException;
+import john.parser.Parser;
+import john.storage.Storage;
+import john.tasks.Deadline;
+import john.tasks.Event;
+import john.tasks.Task;
+import john.tasks.TaskList;
+import john.tasks.Todo;
+import john.ui.JohnUi;
 
 /**
  * Entry point and command loop for the John task manager application.
@@ -141,6 +145,8 @@ public class John {
                     System.out.println(event);
                     System.out.println("You now have " + tasklist.getSize() + " tasks in the list.");
                     break;
+                default:
+                    throw new JohnException("This line should not be reached.");
                 }
             } catch (JohnException e) {
                 System.out.println("Error: " + e.getMessage());

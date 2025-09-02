@@ -1,4 +1,4 @@
-package John.Tasks;
+package john.tasks;
 
 /**
  * A simple task without any date/time attached.

@@ -1,11 +1,11 @@
-package John.Tasks;
+package john.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import John.Exceptions.JohnException;
+import john.exceptions.JohnException;
 
 /**
  * Base abstraction for all task types in John.
@@ -16,6 +16,20 @@ import John.Exceptions.JohnException;
  * persistence.
  */
 public abstract class Task {
+
+    // Supported date/time formats for parsing user input and stored data.
+    private static final DateTimeFormatter[] DATE_TIME_FORMATS = new DateTimeFormatter[] {
+        DateTimeFormatter.ISO_LOCAL_DATE_TIME, // 2019-12-02T18:00. Official format, also saved in local file.
+        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), // 2019-12-02 1800
+        DateTimeFormatter.ofPattern("d/M/uuuu HHmm"), // 2/12/2019 1800
+    };
+
+    private static final DateTimeFormatter[] DATE_ONLY_FORMATS = new DateTimeFormatter[] {
+        DateTimeFormatter.ISO_LOCAL_DATE, // 2019-12-02. Official format, also saved in local file.
+        DateTimeFormatter.ofPattern("d/M/uuuu"), // 2/12/2019
+        DateTimeFormatter.ofPattern("yyyy-MM-dd"), // 2019-12-02
+    };
+
     protected String description;
     protected boolean isDone;
 
@@ -64,19 +78,6 @@ public abstract class Task {
         return getStatusIcon() + " " + description;
     }
 
-    // Supported date/time formats for parsing user input and stored data.
-    private static final DateTimeFormatter[] DATE_TIME_FORMATS = new DateTimeFormatter[] {
-            DateTimeFormatter.ISO_LOCAL_DATE_TIME,            // 2019-12-02T18:00. Official format, also saved in local file.
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),  // 2019-12-02 1800
-            DateTimeFormatter.ofPattern("d/M/uuuu HHmm"),     // 2/12/2019 1800
-    };
-
-    private static final DateTimeFormatter[] DATE_ONLY_FORMATS = new DateTimeFormatter[] {
-            DateTimeFormatter.ISO_LOCAL_DATE,               // 2019-12-02. Official format, also saved in local file.
-            DateTimeFormatter.ofPattern("d/M/uuuu"),        // 2/12/2019
-            DateTimeFormatter.ofPattern("yyyy-MM-dd"),      // 2019-12-02
-    };
-
     /**
      * Attempts to parse the provided date/time string into a {@link LocalDateTime}.
      *
@@ -88,15 +89,15 @@ public abstract class Task {
         for (DateTimeFormatter f : DATE_TIME_FORMATS) {
             try {
                 return LocalDateTime.parse(dateTime, f);
-            }
-            catch (DateTimeParseException ignore) {
+            } catch (DateTimeParseException e) {
+                // do nothing
             }
         }
         for (DateTimeFormatter f : DATE_ONLY_FORMATS) {
             try {
                 return LocalDate.parse(dateTime, f).atStartOfDay();
-            }
-            catch (DateTimeParseException ignore) {
+            } catch (DateTimeParseException e) {
+                // do nothing
             }
         }
 

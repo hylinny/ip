@@ -1,12 +1,13 @@
-package John.Parser;
+package john.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import John.Exceptions.JohnException;
-import John.Tasks.Deadline;
-import John.Tasks.Event;
+import john.exceptions.JohnException;
+import john.tasks.Deadline;
+import john.tasks.Event;
 
 public class ParserTest {
     @Test
