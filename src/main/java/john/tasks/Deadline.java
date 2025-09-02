@@ -1,10 +1,10 @@
-package John.Tasks;
+package john.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-import John.Exceptions.JohnException;
+import john.exceptions.JohnException;
 
 /**
  * A task with a single deadline date/time.
@@ -45,8 +45,12 @@ public class Deadline extends Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Deadline other)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Deadline other)) {
+            return false;
+        }
         return Objects.equals(description, other.description)
                 && Objects.equals(endDate, other.endDate)
                 && isDone == other.isDone;
@@ -54,7 +58,8 @@ public class Deadline extends Task {
 
     @Override
     public int hashCode() {
-        // Purpose of overriding hashcode is to ensure that two equal objects have the same hashcode (e.g. if they are added into a HashSet)
+        // Purpose of overriding hashcode is to ensure that two equal objects have the same hashcode
+        // (e.g. if they are added into a HashSet)
         return Objects.hash(description, endDate, isDone);
     }
 

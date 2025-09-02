@@ -1,4 +1,4 @@
-package John.Storage;
+package john.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,8 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import John.Exceptions.JohnException;
-import John.Tasks.*;
+import john.exceptions.JohnException;
+import john.tasks.Deadline;
+import john.tasks.Event;
+import john.tasks.Task;
+import john.tasks.TaskList;
+import john.tasks.Todo;
 
 /**
  * Handles persistence of tasks to and from a flat file on disk.

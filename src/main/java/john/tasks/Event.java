@@ -1,9 +1,9 @@
-package John.Tasks;
+package john.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import John.Exceptions.JohnException;
+import john.exceptions.JohnException;
 
 /**
  * A task representing an event that spans a start and end date/time.
@@ -49,8 +49,12 @@ public class Event extends Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Event other)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Event other)) {
+            return false;
+        }
         return description.equals(other.description)
                 && startDate.equals(other.startDate)
                 && endDate.equals(other.endDate)

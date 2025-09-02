@@ -1,9 +1,9 @@
-package John.Tasks;
+package john.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import John.Exceptions.JohnException;
+import john.exceptions.JohnException;
 
 /**
  * Mutable collection of {@link Task} objects with basic list operations.
