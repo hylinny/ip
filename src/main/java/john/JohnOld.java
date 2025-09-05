@@ -15,7 +15,7 @@ import john.ui.JohnUi;
 /**
  * Entry point and command loop for the John task manager application.
  */
-public class John {
+public class JohnOld {
 
     private Storage storage;
     private TaskList tasklist;
@@ -32,7 +32,7 @@ public class John {
      *
      * @param filePath path to the persistence file used by {@link Storage}
      */
-    public John(String filePath) {
+    public JohnOld(String filePath) {
         ui = new JohnUi();
         storage = new Storage(filePath);
         try {
@@ -68,7 +68,7 @@ public class John {
                 switch (cmd) {
                 case LIST:
                     System.out.println("Here are the tasks in your list:");
-                    tasklist.printTasks();
+                    tasklist.listTasks();
                     break;
                 case FIND:
                     if (description.isBlank()) {
@@ -164,6 +164,6 @@ public class John {
     }
 
     public static void main(String[] args) {
-        new John("./data/john.txt").run();
+        new JohnOld("./data/john.txt").run();
     }
 }

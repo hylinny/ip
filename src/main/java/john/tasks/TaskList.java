@@ -58,10 +58,12 @@ public class TaskList {
      * Prints all tasks with one-based numbering to standard output.
      * Intended for a simple text UI.
      */
-    public void printTasks() {
+    public String listTasks() {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            sb.append((i + 1)).append(". ").append(tasks.get(i)).append("\n");
         }
+        return sb.toString();
     }
 
     /**
