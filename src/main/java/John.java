@@ -23,7 +23,7 @@ public class John {
     /**
      * Constructs a John application instance bound to a storage file path.
      * It attempts to load tasks from storage, falling back to an empty list
-     * and showing a UI message if loading fails.
+     * if loading fails.
      *
      */
     public John() {
