@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for John using FXML.
+ * A GUI for John chatbot using FXML.
  */
 public class Main extends Application {
 
