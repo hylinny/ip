@@ -1,7 +1,7 @@
 package john.ui;
 
 /**
- * UI utilities for the chatbot John. Replaced by a GUI in new version.
+ * UI utilities for the chatbot John. REPLACED by a GUI in new version.
  */
 public class JohnUi {
     private static final String LINE = "__________________________________________________";
