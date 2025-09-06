@@ -13,7 +13,7 @@ import john.tasks.Todo;
 import john.ui.JohnUi;
 
 /**
- * Entry point and command loop for the John task manager application.
+ * Entry point and command loop for the John task manager application. REPLACED.
  */
 public class JohnOld {
 
