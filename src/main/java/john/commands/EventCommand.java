@@ -27,8 +27,11 @@ public class EventCommand implements Command {
         taskList.addTask(event);
         storage.save(taskList);
 
-        return "Got it. I've added this task:\n" +
-                event + "\n" +
-                "You now have " + taskList.getSize() + " tasks in the list.";
+        return "Got it. I've added this task:\n"
+                + event
+                + "\n"
+                + "You now have "
+                + taskList.getSize()
+                + " tasks in the list.";
     }
 }
