@@ -32,6 +32,8 @@ public class FindCommand implements Command {
 
         for (int i = 0; i < taskList.getSize(); i++) {
             Task t = taskList.getTask(i);
+            assert t != null : "Task from task list should not be null";
+
             if (t.getDescription().contains(description)) {
                 output.append((count + 1)).append(". ").append(t).append("\n");
                 count++;
