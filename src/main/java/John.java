@@ -1,30 +1,24 @@
+import john.commands.Command;
+import john.commands.CommandFactory;
 import john.exceptions.JohnException;
 import john.parser.Parser;
 import john.storage.Storage;
-import john.tasks.Deadline;
-import john.tasks.Event;
-import john.tasks.Task;
 import john.tasks.TaskList;
-import john.tasks.Todo;
 
 /**
  * Entry point and command loop for the John task manager application.
+ * This class handles user input processing and delegates command execution
+ * to appropriate command objects using the command pattern.
  */
 public class John {
-    private final String filePath = "./data/john.txt";
-
+    /** The list of tasks managed by this application */
     private Storage storage;
+    private String filePath = "./data/john.txt";
     private TaskList tasklist;
-
-    enum Command {
-        LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
-    }
 
     /**
      * Constructs a John application instance bound to a storage file path.
      * It attempts to load tasks from storage, falling back to an empty list
-     * if loading fails.
-     *
      */
     public John() {
         storage = new Storage(filePath);
@@ -36,108 +30,33 @@ public class John {
     }
 
     /**
-     * Generates a response for the user's chat message.
+     * Generates a response for the user's chat message by parsing the input
+     * and executing the appropriate command.
+     *
+     * @param input The user's input string containing command and parameters
+     * @return A string response to be displayed to the user
      */
     public String getResponse(String input) {
-        StringBuilder output = new StringBuilder();
         try {
             String[] pair = Parser.parse(input);
-            String command = pair[0];
+            String commandString = pair[0];
             String description = pair[1];
-            Command cmd = Command.valueOf(command.toUpperCase());
-            Task task;
 
-            switch (cmd) {
-            case LIST:
-                output.append("Here are the tasks in your list:\n");
-                output.append(tasklist.listTasks());
-                break;
-            case FIND:
-                if (description.isBlank()) {
-                    throw new JohnException("Find command must include a keyword.");
-                }
-                output.append("Here are the matching tasks in your list:\n");
-                int count = 0;
-                for (int i = 0; i < tasklist.getSize(); i++) {
-                    Task t = tasklist.getTask(i);
-                    if (t.getDescription().contains(description)) {
-                        output.append((count + 1)).append(". ").append(t).append("\n");
-                        count++;
-                    }
-                }
-                if (count == 0) {
-                    output.append("No matching tasks found.\n");
-                }
-                break;
-            case MARK:
-                if (!description.matches("\\d+")) {
-                    throw new JohnException("Please input a valid task number.");
-                }
-                task = tasklist.getTask(Integer.parseInt(description) - 1);
-                task.markDone();
-                storage.save(tasklist);
-                output.append("Nice! I've marked this task as done:\n");
-                output.append(task).append("\n");
-                break;
-            case UNMARK:
-                if (!description.matches("\\d+")) {
-                    throw new JohnException("Please input a valid task number.");
-                }
-                task = tasklist.getTask(Integer.parseInt(description) - 1);
-                task.markUndone();
-                storage.save(tasklist);
-                output.append("OK, I've marked this task as not done yet:\n");
-                output.append(task).append("\n");
-                break;
-            case DELETE:
-                if (!description.matches("\\d+")) {
-                    throw new JohnException("Please input a valid task number.");
-                }
-                task = tasklist.getTask(Integer.parseInt(description) - 1);
-                tasklist.deleteTask(Integer.parseInt(description) - 1);
-                storage.save(tasklist);
-                output.append("Noted. I've removed this task:\n");
-                output.append(task).append("\n");
-                output.append("You now have ").append(tasklist.getSize()).append(" tasks in the list.");
-                break;
-            case TODO:
-                if (description.isBlank()) {
-                    throw new JohnException("Todo command must include a description.");
-                }
-                Todo todo = new Todo(description);
-                tasklist.addTask(todo);
-                storage.save(tasklist);
-                output.append("Got it. I've added this task:\n");
-                output.append(todo).append("\n");
-                output.append("You now have ").append(tasklist.getSize()).append(" tasks in the list.");
-                break;
-            case DEADLINE:
-                Deadline deadline = Parser.getDeadline(description);
-                tasklist.addTask(deadline);
-                storage.save(tasklist);
-                output.append("Got it. I've added this task:\n");
-                output.append(deadline).append("\n");
-                output.append("You now have ").append(tasklist.getSize()).append(" tasks in the list.");
-                break;
-            case EVENT:
-                Event event = Parser.getEvent(description);
-                tasklist.addTask(event);
-                storage.save(tasklist);
-                output.append("Got it. I've added this task:\n");
-                output.append(event).append("\n");
-                output.append("You now have ").append(tasklist.getSize()).append(" tasks in the list.");
-                break;
-            default:
-                throw new JohnException("This line should not be reached.");
-            }
+            Command command = CommandFactory.getCommand(commandString);
+            return command.execute(tasklist, storage, description);
+
         } catch (JohnException e) {
-            output = new StringBuilder("Error: " + e.getMessage());
+            return "Error: " + e.getMessage();
         } catch (IllegalArgumentException e) {
-            output = new StringBuilder("Error: Please input a valid command.");
+            return "Error: Please input a valid command.";
         }
-        return output.toString();
     }
 
+    /**
+     * Main method to start the John application.
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         new John();
     }
