@@ -26,6 +26,20 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the deadline date/time as a formatted string.
+     */
+    public String getEndDate() {
+        return endDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+    }
+
+    /**
+     * Updates the deadline date/time to a new value.
+     */
+    public void setEndDate(String newDate) throws JohnException {
+        this.endDate = this.parseDateTime(newDate);
+    }
+
+    /**
      * Returns the serialized representation of this deadline for storage.
      *
      * @return a one-line string suitable for persistence
