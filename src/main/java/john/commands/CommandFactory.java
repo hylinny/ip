@@ -19,6 +19,7 @@ public class CommandFactory {
         commands.put("TODO", new TodoCommand());
         commands.put("DEADLINE", new DeadlineCommand());
         commands.put("EVENT", new EventCommand());
+        commands.put("POSTPONE", new PostponeCommand());
     }
 
     /**
