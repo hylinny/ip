@@ -30,7 +30,8 @@ public class UnmarkCommand implements Command {
         task.markUndone();
         storage.save(taskList);
 
-        return "OK, I've marked this task as not done yet:\n" +
-                task + "\n";
+        return "OK, I've marked this task as not done yet:\n"
+                + task
+                + "\n";
     }
 }

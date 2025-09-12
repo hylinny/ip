@@ -31,8 +31,11 @@ public class TodoCommand implements Command {
         taskList.addTask(todo);
         storage.save(taskList);
 
-        return "Got it. I've added this task:\n" +
-                todo + "\n" +
-                "You now have " + taskList.getSize() + " tasks in the list.";
+        return "Got it. I've added this task:\n"
+                + todo
+                + "\n"
+                + "You now have "
+                + taskList.getSize()
+                + " tasks in the list.";
     }
 }
