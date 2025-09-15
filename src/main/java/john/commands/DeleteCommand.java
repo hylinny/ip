@@ -30,7 +30,7 @@ public class DeleteCommand implements Command {
         taskList.deleteTask(Integer.parseInt(description) - 1);
         storage.save(taskList);
 
-        return "Noted. I've removed this task:\n"
+        return "My pleasure to assist you. I've removed this task:\n"
                 + task
                 + "\n"
                 + "You now have "

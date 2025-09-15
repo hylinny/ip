@@ -30,6 +30,6 @@ public class MarkCommand implements Command {
         task.markDone();
         storage.save(taskList);
 
-        return "Nice! I've marked this task as done:\n" + task + "\n";
+        return "My pleasure to assist you. I've marked this task as done:\n" + task + "\n";
     }
 }
