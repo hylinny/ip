@@ -1,5 +1,9 @@
 package john.commands;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
 import john.exceptions.JohnException;
 import john.storage.Storage;
 import john.tasks.Task;
@@ -13,6 +17,7 @@ public class FindCommand implements Command {
 
     /**
      * Executes the find command to search for tasks containing the given keyword.
+     * Uses Java streams for efficient filtering and processing.
      *
      * @param taskList The task list to search through
      * @param storage The storage system (not used for finding)
@@ -22,26 +27,34 @@ public class FindCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage, String description) throws JohnException {
+        assert taskList != null : "TaskList should not be null";
+        assert description != null : "Description should not be null";
+
         if (description.isBlank()) {
             throw new JohnException("Find command must include a keyword.");
         }
 
+        // Use streams to filter and collect matching tasks
+        List<Task> matchingTasks = taskList.getTasks()
+                .stream()
+                .filter(task -> {
+                    assert task != null : "Task from task list should not be null";
+                    return task.getDescription().contains(description);
+                })
+                .toList();
+
         StringBuilder output = new StringBuilder();
         output.append("Here are the matching tasks in your list:\n");
-        int count = 0;
 
-        for (int i = 0; i < taskList.getSize(); i++) {
-            Task t = taskList.getTask(i);
-            assert t != null : "Task from task list should not be null";
-
-            if (t.getDescription().contains(description)) {
-                output.append((count + 1)).append(". ").append(t).append("\n");
-                count++;
-            }
-        }
-
-        if (count == 0) {
+        if (matchingTasks.isEmpty()) {
             output.append("No matching tasks found.\n");
+        } else {
+            // Use streams with atomic counter for numbering
+            AtomicInteger counter = new AtomicInteger(1);
+            String formattedTasks = matchingTasks.stream()
+                    .map(task -> counter.getAndIncrement() + ". " + task)
+                    .collect(Collectors.joining("\n"));
+            output.append(formattedTasks).append("\n");
         }
 
         return output.toString();

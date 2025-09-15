@@ -38,7 +38,7 @@ public class John {
      */
     public String getResponse(String input) {
         try {
-            String[] pair = Parser.parse(input);
+            String[] pair = Parser.parse(input.trim());
             String commandString = pair[0];
             String description = pair[1];
 
