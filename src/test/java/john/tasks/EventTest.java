@@ -24,16 +24,16 @@ public class EventTest {
 
     @Test
     public void testEventCreationInvalidStartDate() {
-        assertThrows(JohnException.class, () -> {
-            new Event("Meeting", "invalid date", "2023-12-25T11:00");
-        });
+        assertThrows(JohnException.class, () ->
+                new Event("Meeting", "invalid date", "2023-12-25T11:00")
+        );
     }
 
     @Test
     public void testEventCreationInvalidEndDate() {
-        assertThrows(JohnException.class, () -> {
-            new Event("Meeting", "2023-12-25T10:00", "invalid date");
-        });
+        assertThrows(JohnException.class, () ->
+                new Event("Meeting", "2023-12-25T10:00", "invalid date")
+        );
     }
 
     @Test

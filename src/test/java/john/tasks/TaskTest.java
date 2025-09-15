@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 
 import john.exceptions.JohnException;
@@ -68,16 +66,10 @@ public class TaskTest {
     public void testParseDateTimeInvalidFormat() {
         Task task = new TestTask("Test");
 
-        assertThrows(JohnException.class, () -> {
-            task.parseDateTime("invalid date");
-        });
+        assertThrows(JohnException.class, () -> task.parseDateTime("invalid date"));
 
-        assertThrows(JohnException.class, () -> {
-            task.parseDateTime("2023/13/45");
-        });
+        assertThrows(JohnException.class, () -> task.parseDateTime("2023/13/45"));
 
-        assertThrows(JohnException.class, () -> {
-            task.parseDateTime("");
-        });
+        assertThrows(JohnException.class, () -> task.parseDateTime(""));
     }
 }

@@ -61,21 +61,21 @@ public class DeadlineCommandTest {
 
     @Test
     public void testExecuteInvalidDeadlineFormat() {
-        assertThrows(JohnException.class, () -> {
-            deadlineCommand.execute(taskList, storage, "Invalid deadline format");
-        });
+        assertThrows(JohnException.class, () ->
+                deadlineCommand.execute(taskList, storage, "Invalid deadline format")
+        );
 
-        assertThrows(JohnException.class, () -> {
-            deadlineCommand.execute(taskList, storage, "Task /by invalid-date");
-        });
+        assertThrows(JohnException.class, () ->
+                deadlineCommand.execute(taskList, storage, "Task /by invalid-date")
+        );
 
-        assertThrows(JohnException.class, () -> {
-            deadlineCommand.execute(taskList, storage, "/by 2023-12-25T23:59");
-        });
+        assertThrows(JohnException.class, () ->
+                deadlineCommand.execute(taskList, storage, "/by 2023-12-25T23:59")
+        );
 
-        assertThrows(JohnException.class, () -> {
-            deadlineCommand.execute(taskList, storage, "Submit assignment /by");
-        });
+        assertThrows(JohnException.class, () ->
+                deadlineCommand.execute(taskList, storage, "Submit assignment /by")
+        );
 
         assertEquals(0, taskList.getSize());
     }

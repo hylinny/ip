@@ -68,9 +68,7 @@ public class TaskListTest {
             taskList.getTask(1); // only one task at index 0
         });
 
-        assertThrows(JohnException.class, () -> {
-            taskList.getTask(-1);
-        });
+        assertThrows(JohnException.class, () -> taskList.getTask(-1));
     }
 
     @Test
@@ -89,18 +87,12 @@ public class TaskListTest {
 
     @Test
     public void testDeleteTaskOutOfBounds() {
-        assertThrows(JohnException.class, () -> {
-            taskList.deleteTask(0);
-        });
+        assertThrows(JohnException.class, () -> taskList.deleteTask(0));
 
         taskList.addTask(todo1);
-        assertThrows(JohnException.class, () -> {
-            taskList.deleteTask(1);
-        });
+        assertThrows(JohnException.class, () -> taskList.deleteTask(1));
 
-        assertThrows(JohnException.class, () -> {
-            taskList.deleteTask(-1);
-        });
+        assertThrows(JohnException.class, () -> taskList.deleteTask(-1));
     }
 
     @Test
@@ -127,7 +119,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testTaskListWithMarkedTasks() throws JohnException {
+    public void testTaskListWithMarkedTasks() {
         taskList.addTask(todo1);
         taskList.addTask(todo2);
 

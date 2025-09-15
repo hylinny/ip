@@ -35,17 +35,11 @@ public class CommandFactoryTest {
 
     @Test
     public void testGetInvalidCommand() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            CommandFactory.getCommand("INVALID");
-        });
+        assertThrows(IllegalArgumentException.class, () -> CommandFactory.getCommand("INVALID"));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            CommandFactory.getCommand("random");
-        });
+        assertThrows(IllegalArgumentException.class, () -> CommandFactory.getCommand("random"));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            CommandFactory.getCommand("");
-        });
+        assertThrows(IllegalArgumentException.class, () -> CommandFactory.getCommand(""));
     }
 
     @Test

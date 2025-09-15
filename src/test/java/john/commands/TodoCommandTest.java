@@ -42,13 +42,9 @@ public class TodoCommandTest {
 
     @Test
     public void testExecuteEmptyDescription() {
-        assertThrows(JohnException.class, () -> {
-            todoCommand.execute(taskList, storage, "");
-        });
+        assertThrows(JohnException.class, () -> todoCommand.execute(taskList, storage, ""));
 
-        assertThrows(JohnException.class, () -> {
-            todoCommand.execute(taskList, storage, "   ");
-        });
+        assertThrows(JohnException.class, () -> todoCommand.execute(taskList, storage, "   "));
 
         assertEquals(0, taskList.getSize());
     }

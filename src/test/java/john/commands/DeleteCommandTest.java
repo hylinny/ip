@@ -60,29 +60,17 @@ public class DeleteCommandTest {
 
     @Test
     public void testExecuteInvalidInput() {
-        assertThrows(JohnException.class, () -> {
-            deleteCommand.execute(taskList, storage, "0");
-        });
+        assertThrows(JohnException.class, () -> deleteCommand.execute(taskList, storage, "0"));
 
-        assertThrows(JohnException.class, () -> {
-            deleteCommand.execute(taskList, storage, "4");
-        });
+        assertThrows(JohnException.class, () -> deleteCommand.execute(taskList, storage, "4"));
 
-        assertThrows(JohnException.class, () -> {
-            deleteCommand.execute(taskList, storage, "-1");
-        });
+        assertThrows(JohnException.class, () -> deleteCommand.execute(taskList, storage, "-1"));
 
-        assertThrows(JohnException.class, () -> {
-            deleteCommand.execute(taskList, storage, "abc");
-        });
+        assertThrows(JohnException.class, () -> deleteCommand.execute(taskList, storage, "abc"));
 
-        assertThrows(JohnException.class, () -> {
-            deleteCommand.execute(taskList, storage, "");
-        });
+        assertThrows(JohnException.class, () -> deleteCommand.execute(taskList, storage, ""));
 
-        assertThrows(JohnException.class, () -> {
-            deleteCommand.execute(taskList, storage, "1.5");
-        });
+        assertThrows(JohnException.class, () -> deleteCommand.execute(taskList, storage, "1.5"));
 
         assertEquals(3, taskList.getSize());
     }

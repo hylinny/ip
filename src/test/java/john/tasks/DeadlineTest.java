@@ -25,9 +25,9 @@ public class DeadlineTest {
 
     @Test
     public void testDeadlineCreationInvalidDate() {
-        assertThrows(JohnException.class, () -> {
-            new Deadline("Submit assignment", "invalid date");
-        });
+        assertThrows(JohnException.class, () ->
+                new Deadline("Submit assignment", "invalid date")
+        );
     }
 
     @Test
@@ -61,9 +61,7 @@ public class DeadlineTest {
     public void testSetEndDateInvalid() throws JohnException {
         Deadline deadline = new Deadline("Submit project", "2023-12-25T23:59");
 
-        assertThrows(JohnException.class, () -> {
-            deadline.setEndDate("invalid date");
-        });
+        assertThrows(JohnException.class, () -> deadline.setEndDate("invalid date"));
     }
 
     @Test

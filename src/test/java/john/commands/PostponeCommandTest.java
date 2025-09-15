@@ -1,6 +1,5 @@
 package john.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -65,52 +64,52 @@ public class PostponeCommandTest {
 
     @Test
     public void testExecutePostponeNonDeadlineTask() {
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "1 /to 2024-01-15T23:59");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "1 /to 2024-01-15T23:59")
+        );
     }
 
     @Test
     public void testExecuteInvalidFormat() {
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "2 2024-01-15T23:59");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "2 2024-01-15T23:59")
+        );
 
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "2 /to");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "2 /to")
+        );
 
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "/to 2024-01-15T23:59");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "/to 2024-01-15T23:59")
+        );
     }
 
     @Test
     public void testExecuteInvalidTaskNumber() {
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "0 /to 2024-01-15T23:59");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "0 /to 2024-01-15T23:59")
+        );
 
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "5 /to 2024-01-15T23:59");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "5 /to 2024-01-15T23:59")
+        );
 
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "abc /to 2024-01-15T23:59");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "abc /to 2024-01-15T23:59")
+        );
     }
 
     @Test
     public void testExecuteInvalidDate() {
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "2 /to invalid-date");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "2 /to invalid-date")
+        );
     }
 
     @Test
     public void testExecuteBlankDate() {
-        assertThrows(JohnException.class, () -> {
-            postponeCommand.execute(taskList, storage, "2 /to   ");
-        });
+        assertThrows(JohnException.class, () ->
+                postponeCommand.execute(taskList, storage, "2 /to   ")
+        );
     }
 }

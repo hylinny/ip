@@ -70,49 +70,49 @@ public class EventCommandTest {
 
     @Test
     public void testExecuteInvalidEventFormat() {
-        assertThrows(JohnException.class, () -> {
-            eventCommand.execute(taskList, storage, "Invalid event format");
-        });
+        assertThrows(JohnException.class, () ->
+                eventCommand.execute(taskList, storage, "Invalid event format")
+        );
 
-        assertThrows(JohnException.class, () -> {
-            eventCommand.execute(taskList, storage, "Meeting /from invalid-date /to valid-date");
-        });
+        assertThrows(JohnException.class, () ->
+                eventCommand.execute(taskList, storage, "Meeting /from invalid-date /to valid-date")
+        );
 
         assertEquals(0, taskList.getSize());
     }
 
     @Test
     public void testExecuteMissingDescription() {
-        assertThrows(JohnException.class, () -> {
-            eventCommand.execute(taskList, storage, "/from 2023-12-25T10:00 /to 2023-12-25T11:00");
-        });
+        assertThrows(JohnException.class, () ->
+                eventCommand.execute(taskList, storage, "/from 2023-12-25T10:00 /to 2023-12-25T11:00")
+        );
     }
 
     @Test
     public void testExecuteMissingFromDate() {
-        assertThrows(JohnException.class, () -> {
-            eventCommand.execute(taskList, storage, "Meeting /from /to 2023-12-25T11:00");
-        });
+        assertThrows(JohnException.class, () ->
+                eventCommand.execute(taskList, storage, "Meeting /from /to 2023-12-25T11:00")
+        );
     }
 
     @Test
     public void testExecuteMissingToDate() {
-        assertThrows(JohnException.class, () -> {
-            eventCommand.execute(taskList, storage, "Meeting /from 2023-12-25T10:00 /to");
-        });
+        assertThrows(JohnException.class, () ->
+                eventCommand.execute(taskList, storage, "Meeting /from 2023-12-25T10:00 /to")
+        );
     }
 
     @Test
     public void testExecuteInvalidStartDate() {
-        assertThrows(JohnException.class, () -> {
-            eventCommand.execute(taskList, storage, "Meeting /from invalid-start /to 2023-12-25T11:00");
-        });
+        assertThrows(JohnException.class, () ->
+                eventCommand.execute(taskList, storage, "Meeting /from invalid-start /to 2023-12-25T11:00")
+        );
     }
 
     @Test
     public void testExecuteInvalidEndDate() {
-        assertThrows(JohnException.class, () -> {
-            eventCommand.execute(taskList, storage, "Meeting /from 2023-12-25T10:00 /to invalid-end");
-        });
+        assertThrows(JohnException.class, () ->
+                eventCommand.execute(taskList, storage, "Meeting /from 2023-12-25T10:00 /to invalid-end")
+        );
     }
 }

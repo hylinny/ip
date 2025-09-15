@@ -1,6 +1,5 @@
 package john.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -76,12 +75,8 @@ public class FindCommandTest {
 
     @Test
     public void testExecuteEmptyKeyword() {
-        assertThrows(JohnException.class, () -> {
-            findCommand.execute(taskList, storage, "");
-        });
+        assertThrows(JohnException.class, () -> findCommand.execute(taskList, storage, ""));
 
-        assertThrows(JohnException.class, () -> {
-            findCommand.execute(taskList, storage, "   ");
-        });
+        assertThrows(JohnException.class, () -> findCommand.execute(taskList, storage, "   "));
     }
 }
