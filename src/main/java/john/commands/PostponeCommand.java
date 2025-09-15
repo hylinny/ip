@@ -58,7 +58,7 @@ public class PostponeCommand implements Command {
         deadline.setEndDate(date);
         storage.save(taskList);
 
-        return "Got it! I've postponed this deadline:\n"
+        return "My pleasure to assist you. I've postponed this deadline:\n"
                 + deadline + "\n"
                 + "Previous date: " + oldDate + "\n"
                 + "New date: " + date;
