@@ -1,0 +1,98 @@
+/* === Futuristic Black / Neon theme for the window, input, button, scroll === */
+
+/* Looked-up colors to reuse everywhere */
+.root {
+    -fx-bg: #0b0f14;            /* deep black-blue */
+    -fx-panel: #10161d;         /* panel backdrop */
+    -fx-text: #e6f7ff;          /* bright text */
+    -fx-muted: #98a8b5;         /* muted text */
+    -fx-accent: #00ffe7;        /* neon cyan */
+    -fx-accent-2: #7a5cff;      /* neon violet */
+    -fx-glow: rgba(0,255,231,0.35);
+
+    -fx-background-color: -fx-bg;
+    -fx-text-fill: -fx-text;
+    -fx-font-smoothing-type: gray;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif; /* swap to a sci-fi font if loaded */
+}
+
+/* Outer chat pane chrome */
+.chat-root {
+    -fx-background-color: linear-gradient(to bottom right, #0b0f14, #0f1520);
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-border-width: 2;
+    -fx-border-color: linear-gradient(to right, -fx-accent, -fx-accent-2);
+    -fx-effect: dropshadow(gaussian, -fx-glow, 20, 0.3, 0, 0);
+}
+
+/* Message area container */
+.dialog-container {
+    -fx-padding: 16 14 16 14;
+    -fx-spacing: 12;
+    -fx-background-color: transparent;
+}
+
+/* Scroll pane and viewport */
+.chat-scroll,
+.chat-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Scrollbar styling */
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+.scroll-bar .track {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-background-radius: 8;
+}
+.scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, #1a2230, #273246);
+    -fx-border-color: -fx-accent;
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, -fx-glow, 10, 0.4, 0, 0);
+}
+/* Hide increment/decrement buttons for a sleeker look */
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-pref-height: 0;
+    -fx-pref-width: 0;
+    -fx-opacity: 0;
+}
+
+/* Input field */
+.text-field.chat-input-field {
+    -fx-background-color: #0e141c;
+    -fx-text-fill: -fx-text;
+    -fx-prompt-text-fill: #6f8190;
+    -fx-highlight-fill: -fx-accent;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.5;
+    -fx-border-color: rgba(0,255,231,0.35);
+    -fx-font-size: 14px;
+    -fx-padding: 8 12 8 12;
+    -fx-effect: innershadow(gaussian, rgba(255,255,255,0.04), 6, 0.2, 0, 0);
+}
+.text-field.chat-input-field:focused {
+    -fx-border-color: linear-gradient(to right, -fx-accent, -fx-accent-2);
+    -fx-effect: dropshadow(gaussian, -fx-glow, 18, 0.45, 0, 0);
+}
+
+/* Send button */
+.button.send-button {
+    -fx-background-color: linear-gradient(to right, -fx-accent, -fx-accent-2);
+    -fx-text-fill: #0b0f14;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, -fx-glow, 20, 0.6, 0, 0);
+}
+.button.send-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(122, 92, 255, 0.45), 24, 0.8, 0, 0);
+}
+
